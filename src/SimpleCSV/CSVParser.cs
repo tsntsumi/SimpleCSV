@@ -395,10 +395,10 @@ namespace SimpleCSV
         {
             StringBuilder sb = new StringBuilder(ReadBufferSize);
 
-            while (Char.IsWhiteSpace((char)nextChar))
+            while (nextChar >= 0 && nextChar != '\n' && Char.IsWhiteSpace((char)nextChar))
             {
                 sb.Append((char)nextChar);
-                nextChar = reader.Read();
+                nextChar = Advance(reader);
             }
 
             if (nextChar == QuoteChar && IsIgnoreLeadingWhiteSpace)
