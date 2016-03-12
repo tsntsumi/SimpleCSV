@@ -103,6 +103,13 @@ namespace SimpleCSV
         public CSVReaderNullFieldIndicator NullFieldIndicator { get; private set; }
 
         /// <summary>
+        /// Used for debugging purposes this property returns the number of lines that has been read from
+        /// the reader passed into the CSVParser.
+        /// </summary>
+        /// <value>The lines read.</value>
+        public long LinesRead { get; internal set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SimpleCSV.CSVParser"/> class using comma for separator.
         /// </summary>
         public CSVParser()
@@ -205,13 +212,14 @@ namespace SimpleCSV
             if (separator == NullCharacter) {
                 throw new ArgumentException("The separator character must be defined!");
             }
-            this.Separator = separator;
-            this.QuoteChar = quoteChar;
-            this.EscapeChar = escapeChar;
-            this.IsStrictQuotes = strictQuotes;
-            this.IsIgnoreLeadingWhiteSpace = ignoreLeadingWhiteSpace;
-            this.IsIgnoreQuotations = ignoreQuotations;
-            this.NullFieldIndicator = nullFieldIndicator;
+            Separator = separator;
+            QuoteChar = quoteChar;
+            EscapeChar = escapeChar;
+            IsStrictQuotes = strictQuotes;
+            IsIgnoreLeadingWhiteSpace = ignoreLeadingWhiteSpace;
+            IsIgnoreQuotations = ignoreQuotations;
+            NullFieldIndicator = nullFieldIndicator;
+            LinesRead = 0;
         }
 
         /// <summary>
@@ -468,6 +476,10 @@ namespace SimpleCSV
             if (nextChar == '\r' && reader.Peek() == '\n')
             {
                 nextChar = reader.Read();
+            }
+            if (nextChar == '\n' || nextChar < 0)
+            {
+                LinesRead++;
             }
             return nextChar;
         }
