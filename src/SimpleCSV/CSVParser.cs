@@ -272,7 +272,6 @@ namespace SimpleCSV
                 fields.Add(field);
                 if (nextChar == '\n')
                 {
-                    nextChar = Advance(reader);
                     break;
                 }
                 if (nextChar < 0)

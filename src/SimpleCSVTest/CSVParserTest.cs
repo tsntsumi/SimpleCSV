@@ -645,6 +645,21 @@ namespace SimpleCSVTest
             Assert.AreEqual("", nextLine[0]);
             Assert.AreEqual("2", nextLine[1]);
         }
+
+        [Test]
+        public void TestMultipleLines()
+        {
+            var reader = new StringReader("a,b,c\na,\"b\nc\",d");
+            string[] items;
+            items = csvParser.ParseLine(reader);
+            Assert.AreEqual("a", items[0]);
+            Assert.AreEqual("b", items[1]);
+            Assert.AreEqual("c", items[2]);
+            items = csvParser.ParseLine(reader);
+            Assert.AreEqual("a", items[0]);
+            Assert.AreEqual("b\nc", items[1]);
+            Assert.AreEqual("d", items[2]);
+        }
     }
 }
 
