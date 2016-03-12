@@ -32,7 +32,7 @@ namespace SimpleCSV
 {
     /// <summary>
     /// A simple CSV parser.
-    /// This just implements splitting a single line into fields.
+    /// This just implements splitting a line into fields.
     /// </summary>
     public class CSVParser
     {
