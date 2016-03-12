@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCSV", "SimpleCSV\SimpleCSV.csproj", "{F2436A70-669C-42FC-B7A4-FC48B6D956FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCSVTest", "SimpleCSVTest\SimpleCSVTest.csproj", "{950F285D-D407-4284-827C-27856C005C13}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{950F285D-D407-4284-827C-27856C005C13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{950F285D-D407-4284-827C-27856C005C13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{950F285D-D407-4284-827C-27856C005C13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{950F285D-D407-4284-827C-27856C005C13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2436A70-669C-42FC-B7A4-FC48B6D956FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2436A70-669C-42FC-B7A4-FC48B6D956FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2436A70-669C-42FC-B7A4-FC48B6D956FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2436A70-669C-42FC-B7A4-FC48B6D956FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.StandardHeader = $1
+		$1.Text = @\n${FileName}\n \nAuthor:\n      ${AuthorName} <${AuthorEmail}>\n\nCopyright (c) ${Year} ${CopyrightHolder}\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.
+		$1.IncludeInNewFiles = True
+	EndGlobalSection
+EndGlobal
