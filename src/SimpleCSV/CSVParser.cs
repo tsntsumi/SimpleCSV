@@ -370,7 +370,7 @@ namespace SimpleCSV
                     break;
                 }
                 sb.Append((char)nextChar);
-                nextChar = reader.Read();
+                nextChar = Advance(reader);
             }
 
             field = sb.ToString();

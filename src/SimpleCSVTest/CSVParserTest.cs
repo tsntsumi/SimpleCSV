@@ -153,12 +153,12 @@ namespace SimpleCSVTest
         }
 
         [Test]
-        public void ParseMultiLinedQuotedwithCarriageReturns()
+        public void ParseMultiLinedQuotedWithCarriageReturns()
         {
             string[] items = csvParser.ParseLine(new StringReader("a,\"PO Box 123,\r\nKippax,ACT. 2615.\r\nAustralia\",d.\n"));
             Assert.AreEqual(3, items.Length);
             Assert.AreEqual("a", items[0]);
-            Assert.AreEqual("PO Box 123,\r\nKippax,ACT. 2615.\r\nAustralia", items[1]);
+            Assert.AreEqual("PO Box 123,\nKippax,ACT. 2615.\nAustralia", items[1]);
             Assert.AreEqual("d.", items[2]);
         }
 
