@@ -35,6 +35,7 @@
     <Compile Include="CSVParser.cs" />
     <Compile Include="CSVReaderNullFieldIndicator.cs" />
     <Compile Include="CSVReader.cs" />
+    <Compile Include="CSVParserBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
