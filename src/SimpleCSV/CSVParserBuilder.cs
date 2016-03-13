@@ -33,9 +33,9 @@ namespace SimpleCSV
     /// <example>
     /// <code>
     /// CSVParser parser = new CSVParserBuilder()
-    ///     .withSeparator('\t')
-    ///     .withIgnoreQuotations(true)
-    ///     .build();
+    ///     .WithSeparator('\t')
+    ///     .WithIgnoreQuotations(true)
+    ///     .Build();
     /// </code>
     /// </example>
     /// <seealso cref="CSVParser"/>
