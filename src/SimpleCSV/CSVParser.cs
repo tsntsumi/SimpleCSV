@@ -109,6 +109,8 @@ namespace SimpleCSV
         /// <value>The lines read.</value>
         public long LinesRead { get; internal set; }
 
+        private bool hasNext = true;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleCSV.CSVParser"/> class using comma for separator.
         /// </summary>
@@ -472,14 +474,23 @@ namespace SimpleCSV
         /// <param name="reader">Reader.</param>
         protected int Advance(TextReader reader)
         {
+            if (!hasNext)
+            {
+                return -1;
+            }
             int nextChar = reader.Read();
             if (nextChar == '\r' && reader.Peek() == '\n')
             {
                 nextChar = reader.Read();
             }
-            if (nextChar == '\n' || nextChar < 0)
+            if (nextChar == '\n')
             {
                 LinesRead++;
+            }
+            else if (nextChar < 0)
+            {
+                LinesRead++;
+                hasNext = false;
             }
             return nextChar;
         }
