@@ -37,6 +37,7 @@
     <Compile Include="CSVReader.cs" />
     <Compile Include="CSVParserBuilder.cs" />
     <Compile Include="CSVReaderBuilder.cs" />
+    <Compile Include="CSVWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
