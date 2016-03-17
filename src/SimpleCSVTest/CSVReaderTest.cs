@@ -429,39 +429,43 @@ namespace SimpleCSVTest
             Assert.AreEqual("ddd\"eee", nextLine[3]);
         }
 
-        [TestCase(ExpectedException = typeof(ArgumentException))]
+        [Test]
         public void quoteAndEscapeMustBeDifferent()
         {
             StringBuilder sb = new StringBuilder();
 
             sb.Append("a,b,c,ddd\\\"eee\nf,g,h,\"iii,jjj\"");
 
-                new CSVReader(new StringReader(sb.ToString()), CSVParser.DefaultSeparator, CSVParser.DefaultQuoteCharacter,
-                    CSVParser.DefaultQuoteCharacter, CSVReader.DefaultSkipLines, CSVParser.DefaultStrictQuotes,
-                    CSVParser.DefaultIgnoreLeadingWhiteSpace);
+            Assert.Throws<ArgumentException>(() => new CSVReader(new StringReader(sb.ToString()), CSVParser.DefaultSeparator, CSVParser.DefaultQuoteCharacter,
+                CSVParser.DefaultQuoteCharacter, CSVReader.DefaultSkipLines, CSVParser.DefaultStrictQuotes,
+                CSVParser.DefaultIgnoreLeadingWhiteSpace));
         }
 
-        [TestCase(ExpectedException = typeof(ArgumentException))]
+        [Test]
         public void SeparatorAndEscapeMustBeDifferent()
         {
             StringBuilder sb = new StringBuilder();
 
             sb.Append("a,b,c,ddd\\\"eee\nf,g,h,\"iii,jjj\"");
 
-            new CSVReader(new StringReader(sb.ToString()), CSVParser.DefaultSeparator, CSVParser.DefaultQuoteCharacter,
-                CSVParser.DefaultSeparator, CSVReader.DefaultSkipLines, CSVParser.DefaultStrictQuotes,
-                CSVParser.DefaultIgnoreLeadingWhiteSpace);
+            Assert.Throws<ArgumentException>(() =>
+                new CSVReader(new StringReader(sb.ToString()), CSVParser.DefaultSeparator, CSVParser.DefaultQuoteCharacter,
+                    CSVParser.DefaultSeparator, CSVReader.DefaultSkipLines, CSVParser.DefaultStrictQuotes,
+                    CSVParser.DefaultIgnoreLeadingWhiteSpace)
+            );
         }
 
-        [TestCase(ExpectedException = typeof(ArgumentException))]
+        [Test]
         public void separatorAndQuoteMustBeDifferent() {
             StringBuilder sb = new StringBuilder();
 
             sb.Append("a,b,c,ddd\\\"eee\nf,g,h,\"iii,jjj\"");
 
-            new CSVReader(new StringReader(sb.ToString()), CSVParser.DefaultSeparator, CSVParser.DefaultSeparator,
-                CSVParser.DefaultEscapeCharacter, CSVReader.DefaultSkipLines, CSVParser.DefaultStrictQuotes,
-                CSVParser.DefaultIgnoreLeadingWhiteSpace);
+            Assert.Throws<ArgumentException>(() =>
+                new CSVReader(new StringReader(sb.ToString()), CSVParser.DefaultSeparator, CSVParser.DefaultSeparator,
+                    CSVParser.DefaultEscapeCharacter, CSVReader.DefaultSkipLines, CSVParser.DefaultStrictQuotes,
+                    CSVParser.DefaultIgnoreLeadingWhiteSpace)
+            );
         }
 
         [Test]

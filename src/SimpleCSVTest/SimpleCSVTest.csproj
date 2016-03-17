@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{950F285D-D407-4284-827C-27856C005C13}</ProjectGuid>
+    <ProjectGuid>{A0F81A60-39EA-4DA9-A0A4-29F24E59F8DE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>SimpleCSVTest</RootNamespace>
     <AssemblyName>SimpleCSVTest</AssemblyName>
@@ -30,24 +30,25 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.2.0\lib\net45\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CSVParserTest.cs" />
-    <Compile Include="CSVReaderTest.cs" />
+    <Compile Include="Test.cs" />
     <Compile Include="CSVParserBuilderTest.cs" />
+    <Compile Include="CSVParserTest.cs" />
     <Compile Include="CSVReaderBuilderTest.cs" />
+    <Compile Include="CSVReaderTest.cs" />
     <Compile Include="CSVWriterTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleCSV\SimpleCSV.csproj">
       <Project>{F2436A70-669C-42FC-B7A4-FC48B6D956FA}</Project>
       <Name>SimpleCSV</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
 </Project>

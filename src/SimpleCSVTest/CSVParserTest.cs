@@ -329,7 +329,7 @@ namespace SimpleCSVTest
             Assert.AreEqual("TX", nextLine[3]);
         }
 
-        [TestCase(ExpectedException = typeof(IOException))]
+        [Test]
         public void TestFalseIgnoreQuotations()
         {
             csvParser = new CSVParser(CSVParser.DefaultSeparator,
@@ -340,8 +340,7 @@ namespace SimpleCSVTest
                 false);
             String testString = "Bob,test\",Beaumont,TX";
 
-            String[] nextLine = csvParser.ParseLine(new StringReader(testString));
-            Assert.AreEqual(4, nextLine.Length);
+            Assert.Throws<IOException>(() => csvParser.ParseLine(new StringReader(testString)));
         }
 
         [Test]
@@ -412,10 +411,10 @@ namespace SimpleCSVTest
             Assert.AreEqual("39.918884", nextLine[5]);
         }
 
-        [TestCase(ExpectedException = typeof(IOException))]
+        [Test]
         public void AnIOExceptionThrownifStringEndsInsideAQuotedString()
         {
-            csvParser.ParseLine(new StringReader("This,is a \"bad line to parse."));
+            Assert.Throws<IOException>(() => csvParser.ParseLine(new StringReader("This,is a \"bad line to parse.")));
         }
 
         [Test]
@@ -474,10 +473,10 @@ namespace SimpleCSVTest
             Assert.AreEqual("C:\\foo.txt", nextItem[3]);
         }
 
-        [TestCase(ExpectedException = typeof(ArgumentException))]
+        [Test]
         public void QuoteAndEscapeCannotBeTheSame()
         {
-            new CSVParser(CSVParser.DefaultSeparator, CSVParser.DefaultQuoteCharacter, CSVParser.DefaultQuoteCharacter);
+            Assert.Throws<IOException>(() => new CSVParser(CSVParser.DefaultSeparator, CSVParser.DefaultQuoteCharacter, CSVParser.DefaultQuoteCharacter));
         }
 
         [Test]
@@ -486,22 +485,22 @@ namespace SimpleCSVTest
             new CSVParser(CSVParser.DefaultSeparator, CSVParser.NullCharacter, CSVParser.NullCharacter);
         }
 
-        [TestCase(ExpectedException = typeof(ArgumentException))]
+        [Test]
         public void SeparatorCharacterCannotBeNull()
         {
-            new CSVParser(CSVParser.NullCharacter);
+            Assert.Throws<ArgumentNullException>(() => new CSVParser(CSVParser.NullCharacter));
         }
 
-        [TestCase(ExpectedException = typeof(ArgumentException))]
+        [Test]
         public void SeparatorAndEscapeCannotBeTheSame()
         {
-            new CSVParser(CSVParser.DefaultSeparator, CSVParser.DefaultQuoteCharacter, CSVParser.DefaultSeparator);
+            Assert.Throws<IOException>(() => new CSVParser(CSVParser.DefaultSeparator, CSVParser.DefaultQuoteCharacter, CSVParser.DefaultSeparator));
         }
 
-        [TestCase(ExpectedException = typeof(ArgumentException))]
+        [Test]
         public void SeparatorAndQuoteCannotBeTheSame()
         {
-            new CSVParser(CSVParser.DefaultSeparator, CSVParser.DefaultSeparator, CSVParser.DefaultEscapeCharacter);
+            Assert.Throws<IOException>(() => new CSVParser(CSVParser.DefaultSeparator, CSVParser.DefaultSeparator, CSVParser.DefaultEscapeCharacter));
         }
 
         [Test]

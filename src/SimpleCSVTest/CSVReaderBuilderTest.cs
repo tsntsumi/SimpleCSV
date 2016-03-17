@@ -54,10 +54,10 @@ namespace SimpleCSVTest
             Assert.AreEqual(CSVReader.DefaultSkipLines, csvReader.SkipLines);
         }
 
-        [TestCase(ExpectedException = typeof(ArgumentNullException))]
+        [Test]
         public void TestNullReader()
         {
-            builder = new CSVReaderBuilder(null);
+            Assert.Throws<ArgumentNullException>(() => builder = new CSVReaderBuilder(null));
         }
 
         [Test]
