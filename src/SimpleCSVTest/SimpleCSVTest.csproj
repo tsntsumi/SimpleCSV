@@ -34,7 +34,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test.cs" />
     <Compile Include="CSVParserBuilderTest.cs" />
     <Compile Include="CSVParserTest.cs" />
     <Compile Include="CSVReaderBuilderTest.cs" />
