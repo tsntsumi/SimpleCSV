@@ -476,7 +476,7 @@ namespace SimpleCSVTest
         [Test]
         public void QuoteAndEscapeCannotBeTheSame()
         {
-            Assert.Throws<IOException>(() => new CSVParser(CSVParser.DefaultSeparator, CSVParser.DefaultQuoteCharacter, CSVParser.DefaultQuoteCharacter));
+            Assert.Throws<ArgumentException>(() => new CSVParser(CSVParser.DefaultSeparator, CSVParser.DefaultQuoteCharacter, CSVParser.DefaultQuoteCharacter));
         }
 
         [Test]
@@ -488,19 +488,19 @@ namespace SimpleCSVTest
         [Test]
         public void SeparatorCharacterCannotBeNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new CSVParser(CSVParser.NullCharacter));
+            Assert.Throws<ArgumentException>(() => new CSVParser(CSVParser.NullCharacter));
         }
 
         [Test]
         public void SeparatorAndEscapeCannotBeTheSame()
         {
-            Assert.Throws<IOException>(() => new CSVParser(CSVParser.DefaultSeparator, CSVParser.DefaultQuoteCharacter, CSVParser.DefaultSeparator));
+            Assert.Throws<ArgumentException>(() => new CSVParser(CSVParser.DefaultSeparator, CSVParser.DefaultQuoteCharacter, CSVParser.DefaultSeparator));
         }
 
         [Test]
         public void SeparatorAndQuoteCannotBeTheSame()
         {
-            Assert.Throws<IOException>(() => new CSVParser(CSVParser.DefaultSeparator, CSVParser.DefaultSeparator, CSVParser.DefaultEscapeCharacter));
+            Assert.Throws<ArgumentException>(() => new CSVParser(CSVParser.DefaultSeparator, CSVParser.DefaultSeparator, CSVParser.DefaultEscapeCharacter));
         }
 
         [Test]
