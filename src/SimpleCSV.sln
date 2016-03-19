@@ -5,12 +5,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCSV", "SimpleCSV\Simp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCSVTest", "SimpleCSVTest\SimpleCSVTest.csproj", "{A0F81A60-39EA-4DA9-A0A4-29F24E59F8DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceTest", "PerformanceTest\PerformanceTest.csproj", "{1BB6C837-3D32-4DF4-BF9F-1BD3A8D0BDE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BB6C837-3D32-4DF4-BF9F-1BD3A8D0BDE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BB6C837-3D32-4DF4-BF9F-1BD3A8D0BDE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BB6C837-3D32-4DF4-BF9F-1BD3A8D0BDE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BB6C837-3D32-4DF4-BF9F-1BD3A8D0BDE1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A0F81A60-39EA-4DA9-A0A4-29F24E59F8DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A0F81A60-39EA-4DA9-A0A4-29F24E59F8DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0F81A60-39EA-4DA9-A0A4-29F24E59F8DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
