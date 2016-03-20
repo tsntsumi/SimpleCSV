@@ -343,6 +343,18 @@ namespace SimpleCSVTest
                 Assert.AreEqual("\"abc\",\"def\",\"ghi\"\r", result);
             }
         }
+
+        [Test]
+        public void TestAlternateLineEndWithEmbeddedLineFeed()
+        {
+            string[] line = { "abc", "d\nef", "g\r\nhi" };
+            using (var sw = new StringWriter())
+            using (var cw = new CSVWriterBuilder(sw).WithLineEnd("\r\n").Build())
+            {
+                cw.WriteNext(line, false);
+                Assert.AreEqual("abc,\"d\r\nef\",\"g\r\nhi\"\r\n", sw.ToString());
+            }
+        }
         
         [Test]
         public void TestSeparatorEscapedWhenQuoteIsNotQuoteChar()

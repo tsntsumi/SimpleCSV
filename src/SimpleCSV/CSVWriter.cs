@@ -256,14 +256,23 @@ namespace SimpleCSV
         private string Escape(string plain)
         {
             var sb = new StringBuilder(plain.Length * 2);
+            char prevChar = '\0';
             for (int i = 0; i < plain.Length; i++)
             {
                 char nextChar = plain[i];
-                if (EscapeChar != NoEscapeCharacter && CheckCharacterToEscape(nextChar))
+                if (nextChar == '\n' && prevChar != '\r')
                 {
-                    sb.Append(EscapeChar);
+                    sb.Append(LineEnd);
                 }
-                sb.Append(nextChar);
+                else
+                {
+                    if (EscapeChar != NoEscapeCharacter && CheckCharacterToEscape(nextChar))
+                    {
+                        sb.Append(EscapeChar);
+                    }
+                    sb.Append(nextChar);
+                }
+                prevChar = nextChar;
             }
             return sb.ToString();
         }
