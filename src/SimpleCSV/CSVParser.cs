@@ -313,6 +313,12 @@ namespace SimpleCSV
             return nextChar;
         }
 
+        /// <summary>
+        /// Skips the white spaces.
+        /// </summary>
+        /// <returns>The next character.</returns>
+        /// <param name="nextChar">Next char.</param>
+        /// <param name="reader">Reader to skip.</param>
         protected int SkipWhiteSpaces(int nextChar, TextReader reader)
         {
             while (nextChar >= 0)
@@ -548,4 +554,3 @@ namespace SimpleCSV
         }
     }
 }
-
