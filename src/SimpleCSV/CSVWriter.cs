@@ -64,12 +64,37 @@ namespace SimpleCSV
         /// </summary>
         public static readonly String Rfc4180LineEnd = "\r\n";
 
-        private TextWriter writer;
-        private char separator;
-        private char quoteChar;
-        private char escapeChar;
-        private string lineEnd;
         private bool disposed = false;
+
+        /// <summary>
+        /// Gets the writer.
+        /// </summary>
+        /// <value>The writer.</value>
+        public TextWriter Writer { get; private set; }
+
+        /// <summary>
+        /// Gets the separator.
+        /// </summary>
+        /// <value>The separator.</value>
+        public char Separator { get; private set; }
+
+        /// <summary>
+        /// Gets the quote char.
+        /// </summary>
+        /// <value>The quote char.</value>
+        public char QuoteChar { get; private set; }
+
+        /// <summary>
+        /// Gets the escape char.
+        /// </summary>
+        /// <value>The escape char.</value>
+        public char EscapeChar { get; private set; }
+
+        /// <summary>
+        /// Gets the line end.
+        /// </summary>
+        /// <value>The line end.</value>
+        public string LineEnd { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleCSV.CSVWriter"/> class
@@ -141,11 +166,11 @@ namespace SimpleCSV
         /// <param name="lineEnd">The line feed terminator to use.</param>
         public CSVWriter(TextWriter writer, char separator, char quoteChar, char escapeChar, string lineEnd)
         {
-            this.writer = writer;
-            this.separator = separator;
-            this.quoteChar = quoteChar;
-            this.escapeChar = escapeChar;
-            this.lineEnd = lineEnd;
+            Writer = writer;
+            Separator = separator;
+            QuoteChar = quoteChar;
+            EscapeChar = escapeChar;
+            LineEnd = lineEnd;
         }
 
         /// <summary>
@@ -193,7 +218,7 @@ namespace SimpleCSV
             {
                 if (i > 0)
                 {
-                    nextLine.Append(separator);
+                    nextLine.Append(Separator);
                 }
 
                 if (nextFields[i] == null)
@@ -203,9 +228,9 @@ namespace SimpleCSV
 
                 string field = nextFields[i];
                 bool fieldContainsSpecialCharacters = ContainsSpecialCharacters(field);
-                if ((applyQuotesToAll || fieldContainsSpecialCharacters) && quoteChar != NoQuoteCharacter)
+                if ((applyQuotesToAll || fieldContainsSpecialCharacters) && QuoteChar != NoQuoteCharacter)
                 {
-                    nextLine.Append(quoteChar);
+                    nextLine.Append(QuoteChar);
                 }
                 if (fieldContainsSpecialCharacters)
                 {
@@ -215,13 +240,13 @@ namespace SimpleCSV
                 {
                     nextLine.Append(field);
                 }
-                if ((applyQuotesToAll || fieldContainsSpecialCharacters) && quoteChar != NoQuoteCharacter)
+                if ((applyQuotesToAll || fieldContainsSpecialCharacters) && QuoteChar != NoQuoteCharacter)
                 {
-                    nextLine.Append(quoteChar);
+                    nextLine.Append(QuoteChar);
                 }
             }
-            nextLine.Append(lineEnd);
-            writer.Write(nextLine.ToString());
+            nextLine.Append(LineEnd);
+            Writer.Write(nextLine.ToString());
         }
 
         /// <summary>
@@ -234,9 +259,9 @@ namespace SimpleCSV
             for (int i = 0; i < plain.Length; i++)
             {
                 char nextChar = plain[i];
-                if (escapeChar != NoEscapeCharacter && CheckCharacterToEscape(nextChar))
+                if (EscapeChar != NoEscapeCharacter && CheckCharacterToEscape(nextChar))
                 {
-                    sb.Append(escapeChar);
+                    sb.Append(EscapeChar);
                 }
                 sb.Append(nextChar);
             }
@@ -267,7 +292,7 @@ namespace SimpleCSV
         /// <param name="c">A character.</param>
         private bool IsSpecialCharacter(char c)
         {
-            return c == quoteChar || c == escapeChar || c == separator || c == '\n' || c == '\r';
+            return c == QuoteChar || c == EscapeChar || c == Separator || c == '\n' || c == '\r';
         }
 
         /// <summary>
@@ -277,9 +302,9 @@ namespace SimpleCSV
         /// <param name="c">A character.</param>
         private bool CheckCharacterToEscape(char c)
         {
-            return (quoteChar == NoQuoteCharacter ?
-                (c == quoteChar || c == escapeChar || c == separator) :
-                (c == quoteChar || c == escapeChar));
+            return (QuoteChar == NoQuoteCharacter ?
+                (c == QuoteChar || c == EscapeChar || c == Separator) :
+                (c == QuoteChar || c == EscapeChar));
         }
 
         /// <summary>
@@ -307,10 +332,10 @@ namespace SimpleCSV
             }
             if (disposing)
             {
-                if (writer != null)
+                if (Writer != null)
                 {
-                    writer.Dispose();
-                    writer = null;
+                    Writer.Dispose();
+                    Writer = null;
                 }
             }
 
@@ -318,4 +343,3 @@ namespace SimpleCSV
         }
     }
 }
-
