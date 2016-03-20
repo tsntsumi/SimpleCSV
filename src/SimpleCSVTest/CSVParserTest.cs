@@ -63,7 +63,6 @@ namespace SimpleCSVTest
             Assert.AreEqual("c", items[2]);
         }
 
-
         [Test]
         public void ParseSimpleQuotedString()
         {
@@ -75,10 +74,19 @@ namespace SimpleCSVTest
         }
 
         [Test]
-        public void ParseSimpleQuotedStringWithSpaces() 
+        public void ParseSimpleQuotedStringWithSpaces()
         {
-            CSVParser parser = new CSVParser(CSVParser.DefaultSeparator, CSVParser.DefaultQuoteCharacter, CSVParser.DefaultEscapeCharacter,
-                true, false);
+            string[] items = csvParser.ParseLine(new StringReader(" \"a\" , \"b\" , \"c\" "));
+            Assert.AreEqual(3, items.Length);
+            Assert.AreEqual("a\" ", items[0]);
+            Assert.AreEqual("b\" ", items[1]);
+            Assert.AreEqual("c\" ", items[2]);
+        }
+
+        [Test]
+        public void ParseSimpleQuotedStringWithSpacesWithStrictQuotes()
+        {
+            CSVParser parser = new CSVParserBuilder().WithStrictQuotes(true).Build();
 
             string[] items = parser.ParseLine(new StringReader(" \"a\" , \"b\" , \"c\" "));
             Assert.AreEqual(3, items.Length);
@@ -87,11 +95,23 @@ namespace SimpleCSVTest
             Assert.AreEqual("c", items[2]);
         }
 
+        [Test]
+        public void ParseSimpleStringWithSpaces()
+        {
+            var parser = new CSVParserBuilder().WithIgnoreLeadingWhiteSpace(false).Build();
+
+            string[] items = parser.ParseLine(new StringReader(" \"a\" , \"b\" , \"c\" "));
+            Assert.AreEqual(3, items.Length);
+            Assert.AreEqual(" \"a\" ", items[0]);
+            Assert.AreEqual(" \"b\" ", items[1]);
+            Assert.AreEqual(" \"c\" ", items[2]);
+        }
+
         /// <summary>
         /// Tests quotes in the middle of an element.
         /// </summary>
         [Test]
-        public void TestParsedLineWithInternalQuota() 
+        public void TestParsedLineWithInternalQuote() 
         {
             string[] items = csvParser.ParseLine(new StringReader("a,123\"4\"567,c"));
             Assert.AreEqual(3, items.Length);
@@ -676,4 +696,3 @@ namespace SimpleCSVTest
         }
     }
 }
-
