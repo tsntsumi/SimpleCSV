@@ -118,16 +118,14 @@ var reader = new CSVReaderBuilder(new StreamReader("file.csv"))
 |`"one",t"w"o,"three"` | `WithStrictQuotes(true)` | `{ "one", "w", "three" }` |
 |`one, t"wo, t"hree`   |                          | `{ "one", "t\"wo, t\"hree" }` |
 |`one, t"wo, t"hree`   | `WithIgnoreQuotations(true)` | `{ "one", "t\"wo", "t\"hree" }` |
-|`one, t"wo, three`    |                          | throws `IOException(` |
-|                      |                          | `"Un-terminated quoted field at end of CSV line")` |
+|`one, t"wo, three`    |                          | throws `IOException("Un-terminated quoted field at end of CSV line")` |
 
 #### 空白文字のサンプル
 
 |CSV の行                  | 条件                                  | 返ってくるフィールド |
 |-------------------------|--------------------------------------|----------------------|
 |`"one", "two" , "three"` | `WithIgnoreLeadingWhiteSpace(false)` | `{ "one", " \"two\" ", " \"three\"" }` |
-|`"one", "two" , "three"` | `WithStrictQuotes(true)`,            | `{ "one", "two", "three" }` |
-|                         | `WithIgnoreLeadingWhiteSpace(false)` |  |
+|`"one", "two" , "three"` | `WithStrictQuotes(true)`, `WithIgnoreLeadingWhiteSpace(false)` | `{ "one", "two", "three" }` |
 
 #### 空のフィールドのサンプル
 
@@ -135,8 +133,7 @@ var reader = new CSVReaderBuilder(new StreamReader("file.csv"))
 |----------------------|-------------------------------|----------------------|
 |`,,,"",`              |                               | `{ "", "", "", "", "" }` |
 |`, ,," ",`            |                               | `{ "", " ", "", " ", "" }` |
-|`, ,,"",`             | `WithFieldAsNull(`            |  `{ null, " ", null, "", null }` |
-|                      |    `CSVReaderNullFieldIndicator.EmptySeparators)` | |
+|`, ,,"",`             | `WithFieldAsNull(CSVReaderNullFieldIndicator.EmptySeparators)` |  `{ null, " ", null, "", null }` |
 
 ### 書き込みのサンプル
 #### クォーティング
