@@ -38,8 +38,8 @@ using (var csvWriter = new CSVWriter(new StreamWriter("/path/to/file.csv"), '\t'
 }
 ```
 
-`CSVWriter#WriteNext()` writes line end string specified lineEnd parameter of constractor.
-The default lineEnd parameter is LF.
+`CSVWriter#WriteNext()` writes line end string specified `lineEnd` parameter of constructor.
+The default `lineEnd` parameter is LF.
 
 # Configuration
 
