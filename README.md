@@ -130,7 +130,7 @@ var reader = new CSVReaderBuilder(new StreamReader("file.csv"))
 
 | CSV line(s)              | Condition                | Returns fields                      |
 |--------------------------|--------------------------|-------------------------------------|
-| `"one", "two" , "three"` | `WithIgnoreLeadingWhiteSpace(false)` | `{ "one", " \"two\" ", " \"three\"" }` |
+| `"one", "two" , "three"` | `WithIgnoreLeadingWhiteSpace(false)` | `{ "one", " \"two\" ",`<br/>`" \"three\"" }` |
 | `"one", "two" , "three"` | `WithStrictQuotes(true)`,<br/> `WithIgnoreLeadingWhiteSpace(false)` | `{ "one", "two", "three" }` |
 
 #### Empty Field Samples

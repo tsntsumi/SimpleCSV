@@ -123,7 +123,7 @@ var reader = new CSVReaderBuilder(new StreamReader("file.csv"))
 
 |CSV の行                  | 条件                                  | 返ってくるフィールド |
 |-------------------------|--------------------------------------|----------------------|
-|`"one", "two" , "three"` | `WithIgnoreLeadingWhiteSpace(false)` | `{ "one", " \"two\" ", " \"three\"" }` |
+|`"one", "two" , "three"` | `WithIgnoreLeadingWhiteSpace(false)` | `{ "one", " \"two\" ",`<br/>`" \"three\"" }` |
 |`"one", "two" , "three"` | `WithStrictQuotes(true)`, <br/> `WithIgnoreLeadingWhiteSpace(false)` | `{ "one", "two", "three" }` |
 
 #### 空のフィールドのサンプル
