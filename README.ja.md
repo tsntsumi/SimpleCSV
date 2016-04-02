@@ -128,6 +128,7 @@ var reader = new CSVReaderBuilder(new StreamReader("file.csv"))
 
 #### 空のフィールドのサンプル
 
+<<<<<<< HEAD
 `CSVPerserBulider#WithFieldAsNull()`に`CSVReaderNullFieldIndicator`列挙体のフィールドを指定した場合の例を以下に示します。何も指定しない場合は`Neither`を指定したのと同じです。
 
 |CSV の行               | 条件               | 返ってくるフィールド                  |
@@ -137,6 +138,13 @@ var reader = new CSVReaderBuilder(new StreamReader("file.csv"))
 |`, ,,"",`             | `EmptySeparators` | `{ null, " ", null, "", null }`   |
 |`, ,,"",`             | `EmptyQuotes`     | `{ "", " ", "", null, "" }`       |
 |`, ,,"",`             | `Both`            | `{ null, " ", null, null, null }` |
+=======
+|CSV の行               | 条件                           | 返ってくるフィールド |
+|----------------------|-------------------------------|----------------------|
+|`,,,"",`              |                               | `{ "", "", "", "", "" }` |
+|`, ,," ",`            |                               | `{ "", " ", "", " ", "" }` |
+|`, ,,"",`             | `WithFieldAsNull(CSVReaderNullFieldIndicator.EmptySeparators)` |  `{ null, " ", null, "", null }` |
+>>>>>>> 158999966fe6dc6cff2fa93643f5a03d2fffc39a
 
 ### 書き込みのサンプル
 #### クォーティング
