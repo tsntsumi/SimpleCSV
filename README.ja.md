@@ -36,7 +36,7 @@ using (var csvWriter = new CSVWriter(new StreamWriter("/path/to/file.csv"), '\t'
 
 `CSVWrite#WriteNext()`メソッドはコンストラクタの`lineEnd`引数で指定された改行文字列を行の最後に書き込みます。`lineEnd`引数のデフォルトはLFです。
 
-## コンフィギュレーション
+## 設定
 
 振る舞いを指定するための、コンストラクタとビルダークラスがあります。
 
@@ -128,11 +128,15 @@ var reader = new CSVReaderBuilder(new StreamReader("file.csv"))
 
 #### 空のフィールドのサンプル
 
-|CSV の行               | 条件                           | 返ってくるフィールド |
-|----------------------|-------------------------------|----------------------|
-|`,,,"",`              |                               | `{ "", "", "", "", "" }` |
-|`, ,," ",`            |                               | `{ "", " ", "", " ", "" }` |
-|`, ,,"",`             | `WithFieldAsNull(CSVReaderNullFieldIndicator.EmptySeparators)` |  `{ null, " ", null, "", null }` |
+`CSVPerserBulider#WithFieldAsNull()`に`CSVReaderNullFieldIndicator`列挙体のフィールドを指定した場合の例を以下に示します。何も指定しない場合は`Neither`を指定したのと同じです。
+
+|CSV の行               | 条件               | 返ってくるフィールド                  |
+|----------------------|-------------------|-----------------------------------|
+|`,,,"",`              |                   | `{ "", "", "", "", "" }`          |
+|`, ,," ",`            |                   | `{ "", " ", "", " ", "" }`        |
+|`, ,,"",`             | `EmptySeparators` | `{ null, " ", null, "", null }`   |
+|`, ,,"",`             | `EmptyQuotes`     | `{ "", " ", "", null, "" }`       |
+|`, ,,"",`             | `Both`            | `{ null, " ", null, null, null }` |
 
 ### 書き込みのサンプル
 #### クォーティング
