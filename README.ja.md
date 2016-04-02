@@ -113,8 +113,7 @@ var reader = new CSVReaderBuilder(new StreamReader("file.csv"))
 |----------------------|--------------------------|----------------------|
 |`a,"bcd",e`           |                          | `{ "a", "bcd", "e" }` |
 |`a,"b,c",d`           |                          | `{ "a", "b,c", "d" }` |
-|`a,"b`                |                          | `{ "a", "b\nc", "d" }` |
-|`c", d`               |                          |  |
+|`a,"b` and `c", d`    |                          | `{ "a", "b\nc", "d" }` |
 |`"one",t"w"o,"three"` | `WithStrictQuotes(true)` | `{ "one", "w", "three" }` |
 |`one, t"wo, t"hree`   |                          | `{ "one", "t\"wo, t\"hree" }` |
 |`one, t"wo, t"hree`   | `WithIgnoreQuotations(true)` | `{ "one", "t\"wo", "t\"hree" }` |
@@ -140,10 +139,9 @@ var reader = new CSVReaderBuilder(new StreamReader("file.csv"))
 
 |フィールド                    | CSVの行 |
 |----------------------------|--------------------------|
-|`{ "abc", "d,e,f", "ghi" }` | `"abc","d,e,f","ghi"` |
-|`{ "a \" b", "cde" }`       | `"a "" b","cde"` |
-|`{ "a \n b", "cde" }`       | `"a ` |
-|                            | ` b","cde"` |
+|`{ "abc", "d,e,f", "ghi" }` | `"abc","d,e,f","ghi"`    |
+|`{ "a \" b", "cde" }`       | `"a "" b","cde"`         |
+|`{ "a \n b", "cde" }`       | `"a ` and ` b","cde"`    |
 
 #### 自動クォーティング
 
@@ -151,5 +149,5 @@ var reader = new CSVReaderBuilder(new StreamReader("file.csv"))
 
 |フィールド                        | CSVの行 |
 |--------------------------------|--------------------------|
-|`{ "abc", "d,e,f", "g\"h\"i" }` | `abc,"d,e,f","g""h""i"` |
+|`{ "abc", "d,e,f", "g\"h\"i" }` | `abc,"d,e,f","g""h""i"`  |
 
