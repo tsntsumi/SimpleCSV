@@ -120,7 +120,7 @@ var reader = new CSVReaderBuilder(new StreamReader("file.csv"))
 |-----------------------|--------------------------|-------------------------------------|
 | `a,"bcd",e`           |                          | `{ "a", "bcd", "e" }`               |
 | `a,"b,c",d`           |                          | `{ "a", "b,c", "d" }`               |
-| `a,"b` and `c", d`    |                          | `{ "a", "b\nc", "d" }`              |
+| `a,"b`<br/>`c", d`    |                          | `{ "a", "b\nc", "d" }`              |
 | `"one",t"w"o,"three"` | `WithStrictQuotes(true)` | `{ "one", "w", "three" }`           |
 | `one, t"wo, t"hree`   |                          | `{ "one", "t\"wo, t\"hree" }`       |
 | `one, t"wo, t"hree`   | `WithIgnoreQuotations(true)` | `{ "one", "t\"wo", "t\"hree" }` |
@@ -135,11 +135,13 @@ var reader = new CSVReaderBuilder(new StreamReader("file.csv"))
 
 #### Empty Field Samples
 
-| CSV line(s)           | Condition                | Returns fields                      |
+| CSV line(s)           | WithFieldAsNull()        | Returns fields                      |
 |-----------------------|--------------------------|-------------------------------------|
 | `,,,"",`              |                          | `{ "", "", "", "", "" }`            |
 | `, ,," ",`            |                          | `{ "", " ", "", " ", "" }`          |
-| `, ,,"",`             | `WithFieldAsNull(CSVReaderNullFieldIndicator.EmptySeparators)` | `{ null, " ", null, "", null }` |
+| `, ,,"",`             | `CSVReaderNullFieldIndicator.EmptySeparators` | `{ null, " ", null, "", null }` |
+| `, ,,"",`             | `CSVReaderNullFieldIndicator.EmptyQuotes` | `{ "", " ", "", null, "" }` |
+| `, ,,"",`             | `CSVReaderNullFieldIndicator.Both`        | `{ null, " ", null, null, null }` |
 
 ### For Writing
 
@@ -149,7 +151,7 @@ var reader = new CSVReaderBuilder(new StreamReader("file.csv"))
 |-----------------------------|--------------------------|
 | `{ "abc", "d,e,f", "ghi" }` | `"abc","d,e,f","ghi"`    |
 | `{ "a \" b", "cde" }`       | `"a "" b","cde"`         |
-| `{ "a \n b", "cde" }`       | `"a ` and: ` b","cde"`   |
+| `{ "a \n b", "cde" }`       | `"a `<br/>` b","cde"`    |
 
 #### Auto Quoting
 
