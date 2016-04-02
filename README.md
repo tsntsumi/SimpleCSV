@@ -3,8 +3,8 @@ SimpleCSV
 
 Simple CSV Reader and Writer for C#.
 
-# Reading
-## Reading Records
+## Reading
+### Reading Records
 
 You can loop the lines and read them.
 
@@ -22,8 +22,8 @@ using (var csvReader = new CSVReader(new StreamReader("/path/to/file.csv")))
 If the end of line characters are CR/LF, `CSVReader` converts to LF.
 When single CR appeared, `CSVReader` reads CR as it is.
 
-# Writing
-## Writing Records
+## Writing
+### Writing Records
 
 You can loop the lines and write them.
 
@@ -41,11 +41,11 @@ using (var csvWriter = new CSVWriter(new StreamWriter("/path/to/file.csv"), '\t'
 `CSVWriter#WriteNext()` writes line end string specified `lineEnd` parameter of constructor.
 The default `lineEnd` parameter is LF.
 
-# Configuration
+## Configuration
 
 There are constructors and builder class to specify behavior.
 
-## Separator and Quote Character
+### Separator and Quote Character
 
 You can use a tab for separator.
 
@@ -59,7 +59,7 @@ You can use a single quote character rather than double quote character.
 var reader = new CSVReader(new StreamReader("file.csv"), '\t', '\'');
 ```
 
-## Skip the First Few Lines
+### Skip the First Few Lines
 
 You may also skip the first few lines of the file.
 
@@ -67,7 +67,7 @@ You may also skip the first few lines of the file.
 var reader = new CSVReader(new StreamReader("file.csv"), '\t', '\'', 2);
 ```
 
-## Use the Builder Class
+### Use the Builder Class
 
 You can use the CSVParserBuilder and the CSVReaderBuilder to create the CSVReader.
 
@@ -90,7 +90,7 @@ var writer = new CSVWriterBuilder(new StreamWriter("file.csv"))
 	.Build();
 ```
 
-## Escape Character
+### Escape Character
 
 You can use the another character rather than back quote character for escaping a separator or quote.
 
@@ -103,68 +103,58 @@ var reader = new CSVReaderBuilder(new StreamReader("file.csv"))
 	.Build();
 ```
 
-## Other Stuff
+### Other Stuff
 
 - Strict quotes - Characters outside the quotes are ignored.
 - Ignore leading white space - White space in front of a quote in field is ignored.
 - Ignore quotations - Treat quotations like any other character.
 - Field as null - Which field content will be returned as null: EmptySeparators, EmptyQuotes, Both, Neither.
 
-# CSV Samples
+## CSV Samples
 
-## For Reading
+### For Reading
 
-### Quote Samples
+#### Quote Samples
 
-- CSV line is: `a,"bcd",e`
-    - returns: `{ "a", "bcd", "e" }`
-- CSV line is: `a,"b,c",d`
-    - returns: `{ "a", "b,c", "d" }`
-- CSV lines are: `a,"b` and: `c", d`
-    - returns: `{ "a", "b\nc", "d" }`
-- CSV line is: `"one",t"w"o,"three"`
-    - where `WithStrictQuotes(true)`
-	- returns: `{ "one", "w", "three" }`
-- CSV line is: `one, t"wo, t"hree`
-    - returns: `{ "one", "t\"wo, t\"hree" }`
-- CSV line is: `one, t"wo, t"hree`
-    - where `WithIgnoreQuotations(true)`
-    - returns: `{ "one", "t\"wo", "t\"hree" }`
-- CSV line is: `one, t"wo, three`
-    - throws `IOException("Un-terminated quoted field at end of CSV line")`
+| CSV line(s)           | Condition                | Returns fields                      |
+|-----------------------|--------------------------|-------------------------------------|
+| `a,"bcd",e`           |                          | `{ "a", "bcd", "e" }`               |
+| `a,"b,c",d`           |                          | `{ "a", "b,c", "d" }`               |
+| `a,"b` and `c", d`    |                          | `{ "a", "b\nc", "d" }`              |
+| `"one",t"w"o,"three"` | `WithStrictQuotes(true)` | `{ "one", "w", "three" }`           |
+| `one, t"wo, t"hree`   |                          | `{ "one", "t\"wo, t\"hree" }`       |
+| `one, t"wo, t"hree`   | `WithIgnoreQuotations(true)` | `{ "one", "t\"wo", "t\"hree" }` |
+| `one, t"wo, three`    | | throws `IOException("Un-terminated quoted field at end of CSV line")` |
 
-### White Space Samples
+#### White Space Samples
 
-- CSV line is: `"one", "two" , "three"`
-    - where `WithIgnoreLeadingWhiteSpace(false)`
-    - returns: `{ "one", " \"two\" ", " \"three\"" }`
-- CSV line is: `"one", "two" , "three"`
-    - where `WithStrictQuotes(true)`, `WithIgnoreLeadingWhiteSpace(false)`
-	- returns: `{ "one", "two", "three" }`
+| CSV line(s)              | Condition                | Returns fields                      |
+|--------------------------|--------------------------|-------------------------------------|
+| `"one", "two" , "three"` | `WithIgnoreLeadingWhiteSpace(false)` | `{ "one", " \"two\" ", " \"three\"" }` |
+| `"one", "two" , "three"` | `WithStrictQuotes(true)`, `WithIgnoreLeadingWhiteSpace(false)` | `{ "one", "two", "three" }` |
 
-### Empty Field Samples
+#### Empty Field Samples
 
-- CSV line is: `,,,"",`
-	- returns: `{ "", "", "", "", "" }`
-- CSV line is: `, ,," ",`
-    - returns: `{ "", " ", "", " ", "" }`
-- CSV line is: `, ,,"",`
-    - where `WithFieldAsNull(CSVReaderNullFieldIndicator.EmptySeparators)`
-    - returns: `{ null, " ", null, "", null }`
+| CSV line(s)           | Condition                | Returns fields                      |
+|-----------------------|--------------------------|-------------------------------------|
+| `,,,"",`              |                          | `{ "", "", "", "", "" }`            |
+| `, ,," ",`            |                          | `{ "", " ", "", " ", "" }`          |
+| `, ,,"",`             | `WithFieldAsNull(CSVReaderNullFieldIndicator.EmptySeparators)` | `{ null, " ", null, "", null }` |
 
-## For Writing
+### For Writing
 
-### Quoting
+#### Quoting
 
-- Fields are: `{ "abc", "d,e,f", "ghi" }`
-    - CSV line is: `"abc","d,e,f","ghi"`
-- Fields are: `{ "a \" b", "cde" }`
-    - CSV line is: `"a "" b","cde"`
-- Fields are: `{ "a \n b", "cde" }`
-    - CSV lines are: `"a ` and: ` b","cde"`
+| CSV line(s)                 | Returns fields           |
+|-----------------------------|--------------------------|
+| `{ "abc", "d,e,f", "ghi" }` | `"abc","d,e,f","ghi"`    |
+| `{ "a \" b", "cde" }`       | `"a "" b","cde"`         |
+| `{ "a \n b", "cde" }`       | `"a ` and: ` b","cde"`   |
 
-### Auto Quoting
+#### Auto Quoting
 
-- Fields are: `{ "abc", "d,e,f", "g\"h\"i" }`
-    - where `applyQuotesToAll` parameter is false, like `csvWriter.WriteNext(fields, false);`
-	- CSV line is: `abc,"d,e,f","g""h""i"`
+`applyQuotesToAll` parameter is false, like `csvWriter.WriteNext(fields, false);`.
+
+| CSV line(s)                     | Returns fields           |
+|---------------------------------|--------------------------|
+| `{ "abc", "d,e,f", "g\"h\"i" }` | `abc,"d,e,f","g""h""i"`  |
